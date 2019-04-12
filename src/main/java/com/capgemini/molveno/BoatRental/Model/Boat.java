@@ -5,7 +5,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.*;
 
-@Entity
+@MappedSuperclass
 public class Boat {
 
     @Id
@@ -18,9 +18,7 @@ public class Boat {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    public void setId(long id) { this.id = id; }
 
     public int getNumberOfSeats() {
         return numberOfSeats;

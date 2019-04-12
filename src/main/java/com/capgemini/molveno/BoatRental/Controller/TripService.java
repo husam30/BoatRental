@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 
 @Component
 @Transactional
-public class ReservationService {
+public class TripService {
     @Autowired
-    private RowingRepository rowingRepository;
+    private TripRepository tripRepository;
 }
