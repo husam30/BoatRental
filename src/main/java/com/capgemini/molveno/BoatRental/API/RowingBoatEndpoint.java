@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/rowingboat")
@@ -15,7 +16,7 @@ public class RowingBoatEndpoint {
     private RowingBoatService rowingBoatService;
 
     @GetMapping("/all-boat")
-    public Iterable<RowingBoat> getAllBoat(){ return rowingBoatService.getAllBoatR(); }
+    public List<RowingBoat> getAllBoat(){ return rowingBoatService.getAllBoatR(); }
 
     @PostMapping("/add-one-boat")
     public RowingBoat saveBoat(@RequestBody @Valid @NotNull RowingBoat newBoat){

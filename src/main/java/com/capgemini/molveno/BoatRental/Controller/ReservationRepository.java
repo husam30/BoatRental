@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface ReservationRepository extends CrudRepository<Reservation,Long> {
-    Iterable<Reservation> findAll();
+    List<Reservation> findAll();
     Reservation findById(long id);
 }

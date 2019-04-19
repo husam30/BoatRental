@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -15,7 +16,7 @@ public class RowingBoatService {
     @Autowired
     private RowingRepository rowingRepository;
 
-    public Iterable<RowingBoat> getAllBoatR() { return rowingRepository.findAll(); }
+    public List<RowingBoat> getAllBoatR() { return rowingRepository.findAll(); }
 
     private Optional<RowingBoat> getOneBoatR(Long id){
         return rowingRepository.findById(id);
@@ -49,8 +50,8 @@ public class RowingBoatService {
         if (boat.getNumberOfSeats() == 0) {
             g.setNumberOfSeats(boat.getNumberOfSeats());
         }
-        if (boat.getPricePerHourRowing() == 0) {
-            g.setPricePerHourRowing(boat.getPricePerHourRowing());
+        if (boat.getPrice() == 0) {
+            g.setPrice(boat.getPrice());
         }
 
         rowingRepository.save(g);

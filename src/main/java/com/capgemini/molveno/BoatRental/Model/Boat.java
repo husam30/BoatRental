@@ -5,16 +5,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.*;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Boat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private  long id;
     private  int numberOfSeats;
     private  int bootNumber;
+    private double price;
+    private String boatStatus = "avalible";
 
-    public long getId() {
+    public  long getId() {
         return id;
     }
 
@@ -36,4 +39,19 @@ public class Boat {
         this.bootNumber = bootNumber;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getBoatStatus() {
+        return boatStatus;
+    }
+
+    public void setBoatStatus(String boatStatus) {
+        this.boatStatus = boatStatus;
+    }
 }

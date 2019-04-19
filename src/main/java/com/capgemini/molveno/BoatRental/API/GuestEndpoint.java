@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/guest")
@@ -17,7 +18,7 @@ public class GuestEndpoint {
     private GuestService guestService;
 
     @GetMapping("/all-guest")
-    public Iterable<Guest> getAllGuest(){ return guestService.getAllGuest(); }
+    public List<Guest> getAllGuest(){ return guestService.getAllGuest(); }
 
     @PostMapping("/add-one-guest")
     public Guest saveGuest(@RequestBody @Valid @NotNull Guest newGuest){

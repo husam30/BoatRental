@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/riverraftboat")
@@ -15,7 +16,7 @@ public class RiverRaftBoatEndpoint {
     private RiverRaftBoatService riverRaftBoatService;
 
     @GetMapping("/all-boat")
-    public Iterable<RiverRaftBoat> getAllBoat(){ return riverRaftBoatService.getAllBoatRr(); }
+    public List<RiverRaftBoat> getAllBoat(){ return riverRaftBoatService.getAllBoatRr(); }
 
     @PostMapping("/add-one-boat")
     public RiverRaftBoat saveBoat(@RequestBody @Valid @NotNull RiverRaftBoat newBoat){

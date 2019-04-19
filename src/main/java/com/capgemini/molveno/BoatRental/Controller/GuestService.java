@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -18,7 +19,7 @@ public class GuestService {
     @Autowired
     private GuestRepository guestRepository;
 
-    public Iterable<Guest> getAllGuest() { return guestRepository.findAll(); }
+    public List<Guest> getAllGuest() { return guestRepository.findAll(); }
 
     private Optional<Guest> getOneGuest(Long id){
         return guestRepository.findById(id);
@@ -33,9 +34,9 @@ public class GuestService {
     }
 
     public Guest getSingleGuest(Long id){
-        Optional<Guest> boat = getOneGuest(id);
-        if(boat.isPresent()){
-            return boat.get();
+        Optional<Guest> guest = getOneGuest(id);
+        if(guest.isPresent()){
+            return guest.get();
         }
         return new Guest();
     }
@@ -51,6 +52,9 @@ public class GuestService {
         }
         if (!guest.getLastName().equals("")) {
             g.setLastName(guest.getLastName());
+        }
+        if (!guest.getPhoneNumber().equals("")) {
+            g.setPhoneNumber(guest.getPhoneNumber());
         }
         if (!guest.getEmail().equals("")) {
             g.setEmail(guest.getEmail());
