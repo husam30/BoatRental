@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/riverraftboat")
+@CrossOrigin(origins = "*")
 public class RiverRaftBoatEndpoint {
     @Autowired
     private RiverRaftBoatService riverRaftBoatService;
@@ -28,11 +29,17 @@ public class RiverRaftBoatEndpoint {
         return riverRaftBoatService.getSingleBoatRr(id);
     }
 
-    @DeleteMapping("/delete-one-boat")
-    public void deleteBoat(@RequestParam Long id){
+    @DeleteMapping("/delete-one-boat/{id}")
+    public void deleteBoat(@PathVariable Long id){
         riverRaftBoatService.deleteBoatRr(id);
     }
 
     @PostMapping("/edit-boat")
     public RiverRaftBoat editBoat(@RequestBody @Valid @NotNull RiverRaftBoat editBoat){
-        return riverRaftBoatService.saveBoatRr(editBoat);}}
+        return riverRaftBoatService.saveBoatRr(editBoat);}
+
+    @GetMapping("/set-price/{price}")
+    public void setPrice (@PathVariable double price){
+        riverRaftBoatService.setPrice(price);
+    }
+}

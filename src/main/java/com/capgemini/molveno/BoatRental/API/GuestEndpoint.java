@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/guest")
+@CrossOrigin(origins = "*")
 public class GuestEndpoint {
     @Autowired
     private GuestService guestService;
@@ -30,8 +31,8 @@ public class GuestEndpoint {
         return guestService.getSingleGuest(id);
     }
 
-    @DeleteMapping("/delete-one-guest")
-    public void deleteGuest(@RequestParam Long id){
+    @DeleteMapping("/delete-one-guest/{id}")
+    public void deleteGuest(@PathVariable Long id){
         guestService.deleteGuest(id);
     }
 

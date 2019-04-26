@@ -18,7 +18,7 @@ public class RowingBoatService {
 
     public List<RowingBoat> getAllBoatR() { return rowingRepository.findAll(); }
 
-    private Optional<RowingBoat> getOneBoatR(Long id){
+    public Optional<RowingBoat> getOneBoatR(Long id){
         return rowingRepository.findById(id);
     }
 
@@ -44,17 +44,25 @@ public class RowingBoatService {
         RowingBoat g = rowingRepository.findById(boat.getId());
 
 
-        if (boat.getBootNumber() == 0) {
+        if (boat.getBootNumber() != 0) {
             g.setBootNumber(boat.getBootNumber());
         }
-        if (boat.getNumberOfSeats() == 0) {
+        if (boat.getNumberOfSeats() != 0) {
             g.setNumberOfSeats(boat.getNumberOfSeats());
         }
-        if (boat.getPrice() == 0) {
+        if (boat.getPrice() != 0) {
             g.setPrice(boat.getPrice());
         }
 
         rowingRepository.save(g);
 
+    }
+
+    public void setPrice(double price){
+        List<RowingBoat> ebs = rowingRepository.findAll();
+        for ( RowingBoat boats : ebs){
+            boats.setPrice(price);
+        }
+        rowingRepository.saveAll(ebs);
     }
 }

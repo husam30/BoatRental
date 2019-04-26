@@ -5,6 +5,5 @@ import javax.persistence.Entity;
 @Entity
 public class ElectricalBoat extends Boat{
 
-    private double chargingTime;
 
 }

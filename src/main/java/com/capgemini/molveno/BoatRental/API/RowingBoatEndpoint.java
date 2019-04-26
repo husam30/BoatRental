@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/rowingboat")
+@CrossOrigin(origins = "*")
 public class RowingBoatEndpoint {
     @Autowired
     private RowingBoatService rowingBoatService;
@@ -28,12 +29,17 @@ public class RowingBoatEndpoint {
         return rowingBoatService.getSingleBoatR(id);
     }
 
-    @DeleteMapping("/delete-one-boat")
-    public void deleteBoat(@RequestParam Long id){
+    @DeleteMapping("/delete-one-boat/{id}")
+    public void deleteBoat(@PathVariable Long id){
         rowingBoatService.deleteBoatR(id);
     }
 
     @PostMapping("/edit-boat")
     public RowingBoat editBoat(@RequestBody @Valid @NotNull RowingBoat editBoat){
         return rowingBoatService.saveBoatR(editBoat);}
+
+    @GetMapping("/set-price/{price}")
+    public void setPrice (@PathVariable double price){
+        rowingBoatService.setPrice(price);
+    }
 }

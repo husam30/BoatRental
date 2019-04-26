@@ -14,12 +14,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/reservation")
+@CrossOrigin(origins = "*")
 public class ReservationEndpoint {
     @Autowired
     private ReservationService reservationService;
     //get all boats
-    @GetMapping("/all-boats")
-    public List<Boat> getAllBoat(@RequestParam String type){
+    @GetMapping("/all-boats/{type}")
+    public List<Boat> getAllBoat(@PathVariable String type){
         return reservationService.getAllBoats(type);
     }
 

@@ -18,7 +18,7 @@ public class ElectricalBoatService {
 
     public List<ElectricalBoat> getAllBoatE() { return electricalRepository.findAll(); }
 
-    private Optional<ElectricalBoat> getOneBoatE(Long id){
+    public Optional<ElectricalBoat> getOneBoatE(Long id){
         return electricalRepository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class ElectricalBoatService {
         return electricalRepository.save(newEBoat);
     }
 
-    public void deleteBoatE(@RequestParam Long id){
+    public void deleteBoatE(Long id){
         electricalRepository.deleteById(id);
     }
 
@@ -38,24 +38,31 @@ public class ElectricalBoatService {
         return new ElectricalBoat();
     }
 
-    public void editBoatE(@RequestBody ElectricalBoat boat) {
+    public void editBoatE( ElectricalBoat boat) {
 
 
         ElectricalBoat g = electricalRepository.findById(boat.getId());
 
 
-        if (boat.getBootNumber() == 0) {
+        if (boat.getBootNumber() != 0) {
             g.setBootNumber(boat.getBootNumber());
         }
-        if (boat.getNumberOfSeats() == 0) {
+        if (boat.getNumberOfSeats() != 0) {
             g.setNumberOfSeats(boat.getNumberOfSeats());
         }
-        if (boat.getPrice() == 0) {
+        if (boat.getPrice() != 0) {
             g.setPrice(boat.getPrice());
         }
 
         electricalRepository.save(g);
 
+    }
+    public void setPrice(double price){
+        List<ElectricalBoat> ebs = electricalRepository.findAll();
+        for ( ElectricalBoat boats : ebs){
+            boats.setPrice(price);
+        }
+        electricalRepository.saveAll(ebs);
     }
 
 }

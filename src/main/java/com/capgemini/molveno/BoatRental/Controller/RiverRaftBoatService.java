@@ -3,6 +3,7 @@ package com.capgemini.molveno.BoatRental.Controller;
 import com.capgemini.molveno.BoatRental.Model.RiverRaftBoat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,7 +19,7 @@ public class RiverRaftBoatService {
 
     public List<RiverRaftBoat> getAllBoatRr() { return riverRaftRepository.findAll(); }
 
-    private Optional<RiverRaftBoat> getOneBoatRr(Long id){
+    public Optional<RiverRaftBoat> getOneBoatRr(Long id){
         return riverRaftRepository.findById(id);
     }
 
@@ -26,7 +27,7 @@ public class RiverRaftBoatService {
         return riverRaftRepository.save(newRrBoat);
     }
 
-    public void deleteBoatRr(@RequestParam Long id){
+    public void deleteBoatRr(@PathVariable Long id){
         riverRaftRepository.deleteById(id);
     }
 
@@ -44,17 +45,26 @@ public class RiverRaftBoatService {
         RiverRaftBoat g = riverRaftRepository.findById(boat.getId());
 
 
-        if (boat.getBootNumber() == 0) {
+        if (boat.getBootNumber() != 0) {
             g.setBootNumber(boat.getBootNumber());
         }
-        if (boat.getNumberOfSeats() == 0) {
+        if (boat.getNumberOfSeats() != 0) {
             g.setNumberOfSeats(boat.getNumberOfSeats());
         }
-        if (boat.getPrice() == 0) {
+        if (boat.getPrice() != 0) {
             g.setPrice(boat.getPrice());
         }
 
         riverRaftRepository.save(g);
 
     }
+
+    public void setPrice(double price){
+        List<RiverRaftBoat> ebs = riverRaftRepository.findAll();
+        for ( RiverRaftBoat boats : ebs){
+            boats.setPrice(price);
+        }
+        riverRaftRepository.saveAll(ebs);
+    }
+
 }

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Boat {
 
     @Id
@@ -15,7 +15,7 @@ public class Boat {
     private  int numberOfSeats;
     private  int bootNumber;
     private double price;
-    private String boatStatus = "avalible";
+    private String boatStatus = "Avalible";
 
     public  long getId() {
         return id;

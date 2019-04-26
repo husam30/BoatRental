@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/electricaboat")
+@CrossOrigin(origins = "*")
 public class ElectricalBoatEndpoint {
     @Autowired
     private ElectricalBoatService electricalBoatService;
@@ -24,12 +25,12 @@ public class ElectricalBoatEndpoint {
     }
 
     @GetMapping("/get-one-boat")
-    public ElectricalBoat getSingleBoat(@RequestParam Long id){
+    public ElectricalBoat getSingleBoat(@PathVariable Long id){
         return electricalBoatService.getSingleBoatE(id);
     }
 
-    @DeleteMapping("/delete-one-boat")
-    public void deleteBoat(@RequestParam Long id){
+    @DeleteMapping("/delete-one-boat/{id}")
+    public void deleteBoat(@PathVariable Long id){
         electricalBoatService.deleteBoatE(id);
     }
 
@@ -37,5 +38,12 @@ public class ElectricalBoatEndpoint {
     public ElectricalBoat editBoat(@RequestBody @Valid @NotNull ElectricalBoat editBoat){
         return electricalBoatService.saveBoatE(editBoat);}
 
+
+    @GetMapping("/set-price/{price}")
+    public void setPrice (@PathVariable double price){
+        electricalBoatService.setPrice(price);
     }
+
+
+}
 
